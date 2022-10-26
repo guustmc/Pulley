@@ -657,11 +657,11 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
             
             if supportedPositions.contains(drawerPosition)
             {
-                setDrawerPosition(position: drawerPosition, animated: false)
+                setDrawerPosition(position: drawerPosition, animated: true)
             }
             else if (self.currentDisplayMode == .compact && drawerPosition == .partiallyRevealed && supportedPositions.contains(.open))
             {
-                setDrawerPosition(position: .open, animated: false)
+                setDrawerPosition(position: .open, animated: true)
             }
             else
             {
@@ -669,7 +669,7 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
                     return pos1.rawValue < pos2.rawValue
                     } ?? .collapsed
                 
-                setDrawerPosition(position: lowestDrawerState, animated: false)
+                setDrawerPosition(position: lowestDrawerState, animated: true)
             }
             
             enforceCanScrollDrawer()
