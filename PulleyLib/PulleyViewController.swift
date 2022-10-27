@@ -645,6 +645,11 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
             guard self.isViewLoaded else {
                 return
             }
+
+            if oldValue != supportedPositions {
+                self.view.setNeedsLayout()
+            }
+
             
             guard supportedPositions.count > 0 else {
                 supportedPositions = self.currentDisplayMode == .compact ? PulleyPosition.compact : PulleyPosition.all
@@ -653,11 +658,15 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
             
             if supportedPositions.contains(drawerPosition)
             {
-                setDrawerPosition(position: drawerPosition, animated: true)
+		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
+                	self?.setDrawerPosition(position: drawerPosition, animated: true)
+        	}
             }
             else if (self.currentDisplayMode == .compact && drawerPosition == .partiallyRevealed && supportedPositions.contains(.open))
             {
-                setDrawerPosition(position: .open, animated: true)
+		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
+                	self?.setDrawerPosition(position: .open, animated: true)
+		}
             }
             else
             {
@@ -665,7 +674,9 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
                     return pos1.rawValue < pos2.rawValue
                     } ?? .collapsed
                 
-                setDrawerPosition(position: lowestDrawerState, animated: true)
+		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
+                	self?.setDrawerPosition(position: lowestDrawerState, animated: true)
+		}
             }
             
             enforceCanScrollDrawer()
