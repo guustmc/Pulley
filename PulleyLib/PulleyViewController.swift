@@ -659,6 +659,7 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
             if supportedPositions.contains(drawerPosition)
             {
 		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
+			guard let self = self else { return }
                 	self?.setDrawerPosition(position: self.drawerPosition, animated: true)
         	}
             }
