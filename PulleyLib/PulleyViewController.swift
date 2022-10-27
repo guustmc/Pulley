@@ -651,10 +651,6 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
                 return
             }
             
-            if oldValue != supportedPositions {
-                self.view.setNeedsLayout()
-            }
-            
             if supportedPositions.contains(drawerPosition)
             {
                 setDrawerPosition(position: drawerPosition, animated: true)
